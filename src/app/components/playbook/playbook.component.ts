@@ -163,6 +163,10 @@ export class PlaybookComponent implements OnInit {
   contextMenuY = 0;
   draggedData: any = null;
   svg: SVGSVGElement | null = null;
+  selectedAction: string | null = null;
+  lineStart: { x: number; y: number } | null = null;
+  linePreview: { x: number; y: number } | null = null;
+  draggingAnchor: 'start' | 'end' | null = null;
 
   constructor(private playService: PlayService) {}
 
@@ -176,10 +180,22 @@ export class PlaybookComponent implements OnInit {
 
     this.playService.selectedLine$.subscribe(line => {
       this.selectedLine = line;
+      this.renderStep();
+    });
+
+    window.addEventListener('basketball-action-selected', (e: any) => {
+      this.selectedAction = e.detail;
+      this.lineStart = null;
+      this.linePreview = null;
     });
 
     setTimeout(() => {
       this.svg = document.getElementById('playbook-canvas') as unknown as SVGSVGElement;
+      if (this.svg) {
+        this.svg.addEventListener('mousedown', this.onCanvasMouseDown.bind(this));
+        this.svg.addEventListener('mousemove', this.onCanvasMouseMove.bind(this));
+        this.svg.addEventListener('mouseup', this.onCanvasMouseUp.bind(this));
+      }
     });
   }
 
@@ -216,9 +232,86 @@ export class PlaybookComponent implements OnInit {
 
   onCanvasClick(event: MouseEvent): void {
     // Deselect line if clicking on empty canvas
-    if (event.target === this.svg) {
+    if (!this.selectedAction && event.target === this.svg) {
       this.playService.selectLine(null);
     }
+  }
+
+  onCanvasMouseDown(event: MouseEvent): void {
+    if (this.selectedAction) {
+      const svgPoint = this.svg!.createSVGPoint();
+      svgPoint.x = event.clientX;
+      svgPoint.y = event.clientY;
+      const pt = svgPoint.matrixTransform(this.svg!.getScreenCTM()?.inverse());
+      this.lineStart = pt;
+      this.linePreview = pt;
+    } else if (this.selectedLine) {
+      // Check if anchor is clicked
+      const svgPoint = this.svg!.createSVGPoint();
+      svgPoint.x = event.clientX;
+      svgPoint.y = event.clientY;
+      const pt = svgPoint.matrixTransform(this.svg!.getScreenCTM()?.inverse());
+      const start = this.selectedLine.startAnchor;
+      const end = this.selectedLine.endAnchor;
+      if (this.isNear(pt, start)) {
+        this.draggingAnchor = 'start';
+      } else if (this.isNear(pt, end)) {
+        this.draggingAnchor = 'end';
+      }
+    }
+  }
+
+  onCanvasMouseMove(event: MouseEvent): void {
+    if (this.selectedAction && this.lineStart) {
+      const svgPoint = this.svg!.createSVGPoint();
+      svgPoint.x = event.clientX;
+      svgPoint.y = event.clientY;
+      const pt = svgPoint.matrixTransform(this.svg!.getScreenCTM()?.inverse());
+      this.linePreview = pt;
+      this.renderStep();
+    } else if (this.draggingAnchor && this.selectedLine) {
+      const svgPoint = this.svg!.createSVGPoint();
+      svgPoint.x = event.clientX;
+      svgPoint.y = event.clientY;
+      const pt = svgPoint.matrixTransform(this.svg!.getScreenCTM()?.inverse());
+      if (this.draggingAnchor === 'start') {
+        this.selectedLine.startAnchor = pt;
+      } else {
+        this.selectedLine.endAnchor = pt;
+      }
+      this.playService.updateLineInStep(this.selectedLine);
+      this.renderStep();
+    }
+  }
+
+  onCanvasMouseUp(event: MouseEvent): void {
+    if (this.selectedAction && this.lineStart) {
+      const svgPoint = this.svg!.createSVGPoint();
+      svgPoint.x = event.clientX;
+      svgPoint.y = event.clientY;
+      const pt = svgPoint.matrixTransform(this.svg!.getScreenCTM()?.inverse());
+      // Create line object
+      const line: PlayLine = {
+        id: `line-${Date.now()}`,
+        type: this.selectedAction as any,
+        style: 'straight',
+        startAnchor: { x: this.lineStart.x, y: this.lineStart.y },
+        endAnchor: { x: pt.x, y: pt.y },
+        anchorPoints: 2,
+        points: []
+      };
+      this.playService.addLineToStep(line);
+      this.lineStart = null;
+      this.linePreview = null;
+      this.selectedAction = null;
+      this.renderStep();
+    } else if (this.draggingAnchor) {
+      this.draggingAnchor = null;
+    }
+  }
+
+  isNear(a: { x: number; y: number }, b: { x: number; y: number }): boolean {
+    return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2) < 12;
   }
 
   addPlayer(number: number, type: 'offense' | 'defense', x: number, y: number): void {
@@ -245,10 +338,10 @@ export class PlaybookComponent implements OnInit {
 
   renderStep(): void {
     if (!this.currentStep) return;
-    
     const playersLayer = document.getElementById('players-layer');
     const objectsLayer = document.getElementById('objects-layer');
     const linesLayer = document.getElementById('lines-layer');
+    const handlesLayer = document.getElementById('handles-layer');
 
     if (playersLayer) {
       playersLayer.innerHTML = '';
@@ -263,6 +356,55 @@ export class PlaybookComponent implements OnInit {
     if (linesLayer) {
       linesLayer.innerHTML = '';
       this.currentStep.lines.forEach(l => this.renderLine(l, linesLayer));
+      // Preview line while drawing
+      if (this.selectedAction && this.lineStart && this.linePreview) {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        // Anchor circle
+        const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        anchor.setAttribute('cx', String(this.lineStart.x));
+        anchor.setAttribute('cy', String(this.lineStart.y));
+        anchor.setAttribute('r', '8');
+        anchor.setAttribute('fill', '#27ae60');
+        anchor.setAttribute('stroke', '#fff');
+        anchor.setAttribute('stroke-width', '2');
+        g.appendChild(anchor);
+        // Preview line
+        const previewLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        previewLine.setAttribute('x1', String(this.lineStart.x));
+        previewLine.setAttribute('y1', String(this.lineStart.y));
+        previewLine.setAttribute('x2', String(this.linePreview.x));
+        previewLine.setAttribute('y2', String(this.linePreview.y));
+        previewLine.setAttribute('stroke', '#27ae60');
+        previewLine.setAttribute('stroke-width', '3');
+        previewLine.setAttribute('stroke-dasharray', '4 2');
+        g.appendChild(previewLine);
+        linesLayer.appendChild(g);
+      }
+    }
+
+    if (handlesLayer) {
+      handlesLayer.innerHTML = '';
+      // Show anchors for selected line
+      if (this.selectedLine) {
+        const start = this.selectedLine.startAnchor;
+        const end = this.selectedLine.endAnchor;
+        const startAnchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        startAnchor.setAttribute('cx', String(start.x));
+        startAnchor.setAttribute('cy', String(start.y));
+        startAnchor.setAttribute('r', '8');
+        startAnchor.setAttribute('fill', '#2980b9');
+        startAnchor.setAttribute('stroke', '#fff');
+        startAnchor.setAttribute('stroke-width', '2');
+        handlesLayer.appendChild(startAnchor);
+        const endAnchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        endAnchor.setAttribute('cx', String(end.x));
+        endAnchor.setAttribute('cy', String(end.y));
+        endAnchor.setAttribute('r', '8');
+        endAnchor.setAttribute('fill', '#e74c3c');
+        endAnchor.setAttribute('stroke', '#fff');
+        endAnchor.setAttribute('stroke-width', '2');
+        handlesLayer.appendChild(endAnchor);
+      }
     }
   }
 

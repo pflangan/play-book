@@ -194,5 +194,7 @@ export class ToolboxComponent {
 
   onSelectAction(action: string): void {
     this.selectedAction = this.selectedAction === action ? null : action;
+    // Dispatch custom event to notify playbook
+    window.dispatchEvent(new CustomEvent('basketball-action-selected', { detail: this.selectedAction }));
   }
 }
