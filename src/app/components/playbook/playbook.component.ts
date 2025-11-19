@@ -47,39 +47,11 @@ import { PlayStep, Player, DrawObject, PlayLine, LineAnchor } from '../../models
           <!-- Center circle restricted (dashed) -->
           <circle cx="250" cy="0" r="60" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="6 6"/>
           <!-- Dynamic layers -->
+          <g id="lines-layer"></g>
           <g id="objects-layer"></g>
           <g id="players-layer"></g>
-          <g id="lines-layer"></g>
           <g id="handles-layer"></g>
         </svg>
-        <!-- Context menu for lines -->
-        <ng-container *ngIf="selectedLine">
-          <div
-            class="context-menu"
-            [style.left.px]="contextMenuX"
-            [style.top.px]="contextMenuY">
-            <div class="context-section">
-              <label>Style</label>
-              <ng-container *ngFor="let style of ['straight', 'curved']">
-                <button
-                  (click)="updateLineStyle()"
-                  [class.active]="selectedLine.style === style">
-                  {{ style }}
-                </button>
-              </ng-container>
-            </div>
-            <div class="context-section">
-              <label>Anchor Points</label>
-              <ng-container *ngFor="let count of [2, 3, 4]">
-                <button
-                  (click)="updateLineAnchors(count)"
-                  [class.active]="selectedLine.anchorPoints === count">
-                  {{ count }}
-                </button>
-              </ng-container>
-            </div>
-          </div>
-        </ng-container>
       </div>
     </div>
     `,
@@ -100,6 +72,9 @@ import { PlayStep, Player, DrawObject, PlayLine, LineAnchor } from '../../models
       background: #ecf0f1;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
       overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     #playbook-canvas {
       position: absolute;
@@ -112,53 +87,14 @@ import { PlayStep, Player, DrawObject, PlayLine, LineAnchor } from '../../models
       display: block;
       z-index: 1;
     }
-    .context-menu {
-      position: fixed;
-      background: white;
-      border: 2px solid #2c3e50;
-      border-radius: 4px;
-      padding: 1rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      z-index: 1000;
-    }
-    .context-section {
-      margin-bottom: 1rem;
-    }
-    .context-section:last-child {
-      margin-bottom: 0;
-    }
-    .context-section label {
-      display: block;
-      font-weight: bold;
-      color: #2c3e50;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-    .context-section button {
-      display: inline-block;
-      background: #ecf0f1;
-      border: 2px solid #bdc3c7;
-      padding: 0.25rem 0.5rem;
-      margin-right: 0.5rem;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      transition: all 0.2s;
-    }
-    .context-section button:hover {
-      border-color: #3498db;
-    }
-    .context-section button.active {
-      background: #3498db;
-      color: white;
-      border-color: #3498db;
-    }
   `],
     standalone: false
 })
 export class PlaybookComponent implements OnInit {
   currentStep: PlayStep | null = null;
   selectedLine: PlayLine | null = null;
+  selectedPlayerId: string | null = null;
+  selectedObjectId: string | null = null;
   contextMenuX = 0;
   contextMenuY = 0;
   draggedData: any = null;
@@ -167,6 +103,8 @@ export class PlaybookComponent implements OnInit {
   lineStart: { x: number; y: number } | null = null;
   linePreview: { x: number; y: number } | null = null;
   draggingAnchor: 'start' | 'end' | null = null;
+  lineStartAnchorPlayerId: string | null = null;
+  draggingPlayer: Player | null = null;
 
   constructor(private playService: PlayService) {}
 
@@ -223,6 +161,8 @@ export class PlaybookComponent implements OnInit {
 
     if (this.draggedData.type === 'offense-player') {
       this.addPlayer(this.draggedData.param, 'offense', pt.x, pt.y);
+    } else if (this.draggedData.type === 'offense-with-ball-player') {
+      this.addPlayer(this.draggedData.param, 'offense-with-ball', pt.x, pt.y);
     } else if (this.draggedData.type === 'defense-player') {
       this.addPlayer(this.draggedData.param, 'defense', pt.x, pt.y);
     } else if (['basketball', 'cone', 'chair'].includes(this.draggedData.type)) {
@@ -231,14 +171,40 @@ export class PlaybookComponent implements OnInit {
   }
 
   onCanvasClick(event: MouseEvent): void {
-    // Deselect line if clicking on empty canvas
-    if (!this.selectedAction && event.target === this.svg) {
+    const handlesLayer = document.getElementById('handles-layer');
+    const target = event.target as SVGElement;
+    const isLine = target && target.hasAttribute('data-line-id');
+    const isObject = target && target.hasAttribute('data-object-id');
+    const isPlayer = target && target.hasAttribute('data-player-id');
+    // Deselect symbol and hide handles if clicking anywhere on SVG except a line/object/player
+    if (!isLine && !isObject && !isPlayer) {
+      this.selectedPlayerId = null;
+      this.selectedObjectId = null;
+      //this.selectedAction = null;
       this.playService.selectLine(null);
+      if (handlesLayer) handlesLayer.style.display = 'none';
+    }
+    // If clicking on an object or player, clear drawing action, deselect line, and hide handles
+    if (isObject || isPlayer) {
+      this.selectedAction = null;
+      this.playService.selectLine(null);
+      if (handlesLayer) handlesLayer.style.display = 'none';
     }
   }
 
   onCanvasMouseDown(event: MouseEvent): void {
     if (this.selectedAction) {
+      const target = event.target as SVGElement;
+      const playerId = target?.closest('[data-player-id]')?.getAttribute('data-player-id');
+      if (playerId && this.currentStep) {
+        const player = this.currentStep.players.find(p => p.id === playerId);
+        if (player) {
+          this.lineStart = { x: player.x, y: player.y };
+          this.linePreview = { x: player.x, y: player.y };
+          this.lineStartAnchorPlayerId = playerId;
+          return;
+        }
+      }
       const svgPoint = this.svg!.createSVGPoint();
       svgPoint.x = event.clientX;
       svgPoint.y = event.clientY;
@@ -258,6 +224,8 @@ export class PlaybookComponent implements OnInit {
       } else if (this.isNear(pt, end)) {
         this.draggingAnchor = 'end';
       }
+      // Clear drawing action when selecting a line anchor
+      this.selectedAction = null;
     }
   }
 
@@ -300,10 +268,15 @@ export class PlaybookComponent implements OnInit {
         anchorPoints: 2,
         points: []
       };
+      // Store line with anchor attachment if applicable
+      if (this.lineStartAnchorPlayerId) {
+        line.startAnchor.attachedTo = this.lineStartAnchorPlayerId;
+      }
       this.playService.addLineToStep(line);
       this.lineStart = null;
       this.linePreview = null;
-      this.selectedAction = null;
+      this.lineStartAnchorPlayerId = null;
+      // Do NOT reset selectedAction, allow multiple lines to be drawn
       this.renderStep();
     } else if (this.draggingAnchor) {
       this.draggingAnchor = null;
@@ -314,7 +287,7 @@ export class PlaybookComponent implements OnInit {
     return Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2) < 12;
   }
 
-  addPlayer(number: number, type: 'offense' | 'defense', x: number, y: number): void {
+  addPlayer(number: number, type: 'offense' | 'defense' | 'offense-with-ball', x: number, y: number): void {
     const player: Player = {
       id: `player-${Date.now()}`,
       type,
@@ -384,8 +357,8 @@ export class PlaybookComponent implements OnInit {
 
     if (handlesLayer) {
       handlesLayer.innerHTML = '';
-      // Show anchors for selected line
       if (this.selectedLine) {
+        handlesLayer.style.display = 'block';
         const start = this.selectedLine.startAnchor;
         const end = this.selectedLine.endAnchor;
         const startAnchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -404,6 +377,23 @@ export class PlaybookComponent implements OnInit {
         endAnchor.setAttribute('stroke', '#fff');
         endAnchor.setAttribute('stroke-width', '2');
         handlesLayer.appendChild(endAnchor);
+      } else if (this.draggingPlayer && this.currentStep) {
+        // Show only start anchor when dragging a player close to it
+        handlesLayer.style.display = 'block';
+        this.currentStep.lines.forEach(line => {
+          if (!line.startAnchor.attachedTo && this.isNear({ x: this.draggingPlayer!.x, y: this.draggingPlayer!.y }, line.startAnchor)) {
+            const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            anchor.setAttribute('cx', String(line.startAnchor.x));
+            anchor.setAttribute('cy', String(line.startAnchor.y));
+            anchor.setAttribute('r', '8');
+            anchor.setAttribute('fill', '#2980b9');
+            anchor.setAttribute('stroke', '#fff');
+            anchor.setAttribute('stroke-width', '2');
+            handlesLayer.appendChild(anchor);
+          }
+        });
+      } else {
+        handlesLayer.style.display = 'none';
       }
     }
   }
@@ -415,17 +405,38 @@ export class PlaybookComponent implements OnInit {
     g.setAttribute('data-player-id', player.id);
     g.style.cursor = 'move';
 
-    const circle = document.createElementNS('http://www.w3.org/2000/svg', player.type === 'offense' ? 'circle' : 'polygon');
+    // Highlight if selected
+    if (this.selectedPlayerId === player.id) {
+      const highlight = document.createElementNS('http://www.w3.org/2000/svg', (player.type === 'offense' || player.type === 'offense-with-ball') ? 'circle' : 'polygon');
+      if (player.type === 'offense' || player.type === 'offense-with-ball') {
+        highlight.setAttribute('cx', '0');
+        highlight.setAttribute('cy', '0');
+        highlight.setAttribute('r', '15');
+      } else {
+        highlight.setAttribute('points', '0,-18 18,12 -18,12');
+      }
+      highlight.setAttribute('fill', 'none');
+      highlight.setAttribute('stroke', '#fff');
+      highlight.setAttribute('stroke-width', '4');
+      g.appendChild(highlight);
+    }
 
-		if (player.type === 'offense') {
-			circle.setAttribute('cx', '0');
-			circle.setAttribute('cy', '0');
-			circle.setAttribute('r', '12');
-		} else {
-			circle.setAttribute('points', '0,-15 15,10 -15,10');
-		}
-    circle.setAttribute('fill', player.type === 'offense' ? 'rgba(255,255,255,0.1)' : 'rgba(255,0,0,0.1)');
-    circle.setAttribute('stroke', player.type === 'offense' ? 'black' : 'red');
+    const circle = document.createElementNS('http://www.w3.org/2000/svg', (player.type === 'offense' || player.type === 'offense-with-ball') ? 'circle' : 'polygon');
+    if (player.type === 'offense' || player.type === 'offense-with-ball') {
+      circle.setAttribute('cx', '0');
+      circle.setAttribute('cy', '0');
+      circle.setAttribute('r', '12');
+    } else {
+      circle.setAttribute('points', '0,-15 15,10 -15,10');
+    }
+    circle.setAttribute('fill', (player.type === 'offense' || player.type === 'offense-with-ball') ? 'rgba(255,255,255,0.1)' : 'rgba(255,0,0,0.1)');
+    if (player.type === 'offense-with-ball') {
+      circle.setAttribute('stroke', 'black');
+    } else if (player.type === 'offense') {
+      circle.setAttribute('stroke', 'transparent');
+    } else {
+      circle.setAttribute('stroke', 'red');
+    }
     circle.setAttribute('stroke-width', '2');
 
     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -442,7 +453,16 @@ export class PlaybookComponent implements OnInit {
 
     // Make draggable
     this.makePlayerDraggable(g, player);
-
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.selectedPlayerId = player.id;
+      this.selectedObjectId = null;
+      this.selectedAction = null;
+      this.playService.selectLine(null);
+      const handlesLayer = document.getElementById('handles-layer');
+      if (handlesLayer) handlesLayer.style.display = 'none';
+      window.dispatchEvent(new CustomEvent('basketball-clear-action'));
+    });
     container.appendChild(g);
   }
 
@@ -471,6 +491,39 @@ export class PlaybookComponent implements OnInit {
     }
 
     g.innerHTML = svg;
+    // Highlight if selected
+    if (this.selectedObjectId === obj.id) {
+      let highlight: SVGElement;
+      if (obj.type === 'basketball') {
+        highlight = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        highlight.setAttribute('cx', '0');
+        highlight.setAttribute('cy', '0');
+        highlight.setAttribute('r', '11');
+      } else if (obj.type === 'cone') {
+        highlight = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        highlight.setAttribute('points', '0,-13 10,11 -10,11');
+      } else {
+        highlight = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        highlight.setAttribute('x', '-9');
+        highlight.setAttribute('y', '-7');
+        highlight.setAttribute('width', '18');
+        highlight.setAttribute('height', '14');
+      }
+      highlight.setAttribute('fill', 'none');
+      highlight.setAttribute('stroke', '#fff');
+      highlight.setAttribute('stroke-width', '4');
+      g.insertBefore(highlight, g.firstChild);
+    }
+    g.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.selectedObjectId = obj.id;
+      this.selectedPlayerId = null;
+      this.selectedAction = null;
+      this.playService.selectLine(null);
+      const handlesLayer = document.getElementById('handles-layer');
+      if (handlesLayer) handlesLayer.style.display = 'none';
+      window.dispatchEvent(new CustomEvent('basketball-clear-action'));
+    });
     this.makeObjectDraggable(g, obj);
     container.appendChild(g);
   }
@@ -508,9 +561,11 @@ export class PlaybookComponent implements OnInit {
 
     path.addEventListener('click', (e) => {
       e.stopPropagation();
-      this.contextMenuX = e.clientX;
-      this.contextMenuY = e.clientY;
+      this.selectedPlayerId = null;
+      this.selectedObjectId = null;
+      this.selectedAction = null;
       this.playService.selectLine(line);
+      window.dispatchEvent(new CustomEvent('basketball-clear-action'));
     });
 
     g.appendChild(path);
@@ -522,7 +577,9 @@ export class PlaybookComponent implements OnInit {
     let offset = { x: 0, y: 0 };
 
     g.addEventListener('pointerdown', (e) => {
+      if (this.selectedAction) return;
       dragging = true;
+      this.draggingPlayer = player;
       const pt = this.getSVGCoordinates(e.clientX, e.clientY);
       offset = { x: pt.x - player.x, y: pt.y - player.y };
     });
@@ -532,11 +589,42 @@ export class PlaybookComponent implements OnInit {
       const pt = this.getSVGCoordinates(e.clientX, e.clientY);
       player.x = pt.x - offset.x;
       player.y = pt.y - offset.y;
+      // Update anchored lines to follow this player
+      if (this.currentStep) {
+        this.currentStep.lines.forEach(line => {
+          if (line.startAnchor.attachedTo === player.id) {
+            line.startAnchor = { x: player.x, y: player.y, attachedTo: player.id };
+            this.playService.updateLineInStep(line);
+          }
+          if (line.endAnchor.attachedTo === player.id) {
+            line.endAnchor = { x: player.x, y: player.y, attachedTo: player.id };
+            this.playService.updateLineInStep(line);
+          }
+        });
+      }
       this.renderStep();
     });
 
     window.addEventListener('pointerup', () => {
+      if (!dragging) return;
       dragging = false;
+      this.draggingPlayer = null;
+      // Check if player is close to any unattached line anchors
+      if (this.currentStep) {
+        this.currentStep.lines.forEach(line => {
+          // Check start anchor attachment
+          if (!line.startAnchor.attachedTo && this.isNear({ x: player.x, y: player.y }, line.startAnchor)) {
+            line.startAnchor.attachedTo = player.id;
+            this.playService.updateLineInStep(line);
+          }
+          // Check end anchor attachment
+          if (!line.endAnchor.attachedTo && this.isNear({ x: player.x, y: player.y }, line.endAnchor)) {
+            line.endAnchor.attachedTo = player.id;
+            this.playService.updateLineInStep(line);
+          }
+        });
+      }
+      this.renderStep();
     });
   }
 

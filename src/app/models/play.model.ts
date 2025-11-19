@@ -1,6 +1,6 @@
 export interface Player {
   id: string;
-  type: 'offense' | 'defense';
+  type: 'offense' | 'defense' | 'offense-with-ball';
   number: number;
   x: number;
   y: number;

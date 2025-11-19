@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { PlayService } from '../../services/play.service';
 import { Player, DrawObject, PlayLine, LineAnchor } from '../../models/play.model';
 
@@ -11,13 +11,14 @@ import { Player, DrawObject, PlayLine, LineAnchor } from '../../models/play.mode
       <!-- Players Panel -->
       <div class="panel">
         <h4>Players</h4>
+        <!-- Offense-with-ball group -->
         <div class="players-grid">
           @for (num of [1, 2, 3, 4, 5]; track num) {
             <div
-              class="player-item offense"
+              class="player-item offense-with-ball"
               draggable="true"
-              (dragstart)="onDragStart($event, 'offense-player', num)"
-              title="Drag to add offensive player">
+              (dragstart)="onDragStart($event, 'offense-with-ball-player', num)"
+              title="Drag to add offense-with-ball player">
               <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="20" cy="20" r="18" fill="transparent" stroke="black" stroke-width="3"/>
                 <text x="20" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="black">{{ num }}</text>
@@ -25,6 +26,22 @@ import { Player, DrawObject, PlayLine, LineAnchor } from '../../models/play.mode
             </div>
           }
         </div>
+        <!-- Offense group (no ball, transparent border) -->
+        <div class="players-grid" style="margin-top: 1rem;">
+          @for (num of [1, 2, 3, 4, 5]; track num) {
+            <div
+              class="player-item offense"
+              draggable="true"
+              (dragstart)="onDragStart($event, 'offense-player', num)"
+              title="Drag to add offensive player (no ball)">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="18" fill="transparent" stroke="transparent" stroke-width="3"/>
+                <text x="20" y="26" text-anchor="middle" font-size="16" font-weight="bold" fill="black">{{ num }}</text>
+              </svg>
+            </div>
+          }
+        </div>
+        <!-- Defense group -->
         <div class="players-grid" style="margin-top: 1rem;">
           @for (num of [1, 2, 3, 4, 5]; track num) {
             <div
@@ -177,12 +194,26 @@ import { Player, DrawObject, PlayLine, LineAnchor } from '../../models/play.mode
   `],
     standalone: false
 })
-export class ToolboxComponent {
+export class ToolboxComponent implements OnInit {
   actions = ['dribble', 'pass', 'cut', 'screen', 'shot', 'handoff'];
+  lineStyles: Array<'straight' | 'curved'> = ['straight', 'curved'];
+  anchorCounts: Array<2 | 3 | 4> = [2, 3, 4];
   selectedAction: string | null = null;
   draggedData: any = null;
+  selectedLine: PlayLine | null = null;
 
-  constructor(private playService: PlayService) {}
+  constructor(private playService: PlayService, private ngZone: NgZone) {}
+
+  ngOnInit(): void {
+    this.playService.selectedLine$.subscribe(line => {
+      this.selectedLine = line;
+    });
+    window.addEventListener('basketball-clear-action', () => {
+      this.ngZone.run(() => {
+        this.selectedAction = null;
+      });
+    });
+  }
 
   onDragStart(event: DragEvent, type: string, param: any): void {
     this.draggedData = { type, param };
@@ -194,7 +225,6 @@ export class ToolboxComponent {
 
   onSelectAction(action: string): void {
     this.selectedAction = this.selectedAction === action ? null : action;
-    // Dispatch custom event to notify playbook
     window.dispatchEvent(new CustomEvent('basketball-action-selected', { detail: this.selectedAction }));
   }
 }
