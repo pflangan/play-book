@@ -1,5 +1,6 @@
 name: Build and Deploy Angular App
-
+permissions:
+  contents: write
 on:
   push:
     branches:
@@ -45,3 +46,9 @@ jobs:
             cd ${{ secrets.DEPLOY_PATH }}
             # Add your restart commands here
             # Example: systemctl restart your-app
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist/basketball-play-creator
