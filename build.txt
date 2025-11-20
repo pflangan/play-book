@@ -1,0 +1,1632 @@
+❯ Building...
+✔ Building...
+Application bundle generation failed. [4.074 seconds]
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'nextStep' does not exist on type 'PlayService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/play-steps/play-steps.component.ts:141:21:
+[37m      141 │     this.playService.[32mnextStep[37m();
+          ╵                      [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'deleteCurrentStep' does not exist on type 'PlayService'. Did you mean 'getCurrentStep'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/play-steps/play-steps.component.ts:145:21:
+[37m      145 │     this.playService.[32mdeleteCurrentStep[37m();
+          ╵                      [32m~~~~~~~~~~~~~~~~~[0m
+
+  'getCurrentStep' is declared here.
+
+    src/app/services/play.service.ts:42:2:
+[37m      42 │   [32mgetCurrentStep[37m(): PlayStep | null {
+         ╵   [32m~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'cloneCurrentStep' does not exist on type 'PlayService'. Did you mean 'currentStep$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/play-steps/play-steps.component.ts:149:21:
+[37m      149 │     this.playService.[32mcloneCurrentStep[37m();
+          ╵                      [32m~~~~~~~~~~~~~~~~[0m
+
+  'currentStep$' is declared here.
+
+    src/app/services/play.service.ts:13:9:
+[37m      13 │   public [32mcurrentStep$[37m = this.currentStepSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'createBlankStepAfterCurrent' does not exist on type 'PlayService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/play-steps/play-steps.component.ts:153:21:
+[37m      153 │     this.playService.[32mcreateBlankStepAfterCurrent[37m();
+          ╵                      [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'setCurrentStep' does not exist on type 'PlayService'. Did you mean 'getCurrentStep'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/play-steps/play-steps.component.ts:157:21:
+[37m      157 │     this.playService.[32msetCurrentStep[37m(index);
+          ╵                      [32m~~~~~~~~~~~~~~[0m
+
+  'getCurrentStep' is declared here.
+
+    src/app/services/play.service.ts:42:2:
+[37m      42 │   [32mgetCurrentStep[37m(): PlayStep | null {
+         ╵   [32m~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1m/Users/paul/sites/basketball-ai/basketball-ai-1/src/app/services/play.service.ts: Unexpected token (93:10)
+
+  91 | selectLine(line, PlayLine | null);
+  92 | void {
+> 93 |     this: .selectedLineSubject.next(line)
+     |           ^
+  94 | };
+  95 | nextStep();
+  96 | void {[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:3:20:
+[37m      3 │ import * as i1 from [32m"../../services/play.service"[37m;
+        ╵                     [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+  This error came from the "onLoad" callback registered here:
+
+    node_modules/@angular/build/src/tools/esbuild/angular/compiler-plugin.js:279:18:
+[37m      279 │             build.[32monLoad[37m({ filter: /\.[cm]?[jt]sx?$/ }, async (ar...
+          ╵                   [32m~~~~~~[0m
+
+    at setup (/Users/paul/sites/basketball-ai/basketball-ai-1/node_modules/@angular/build/src/tools/esbuild/angular/compiler-plugin.js:279:19)
+    at async handlePlugins (/Users/paul/sites/basketball-ai/basketball-ai-1/node_modules/esbuild/lib/main.js:1194:20)
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'selectLine' does not exist on type 'PlayService'. Did you mean 'selectedLine$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:134:27:
+[37m      134 │           this.playService.[32mselectLine[37m(null);
+          ╵                            [32m~~~~~~~~~~[0m
+
+  'selectedLine$' is declared here.
+
+    src/app/services/play.service.ts:16:9:
+[37m      16 │   public [32mselectedLine$[37m = this.selectedLineSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'removePlayerFromStep' does not exist on type 'PlayService'. Did you mean 'removePlayerFromSterId'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:137:27:
+[37m      137 │ ...    this.playService.[32mremovePlayerFromStep[37m(this.selectedPlayerId);
+          ╵                         [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+  'removePlayerFromSterId' is declared here.
+
+    src/app/services/play.service.ts:89:2:
+[37m      89 │   [32mremovePlayerFromSterId[37m: string): void {
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'removeObjectFromStep' does not exist on type 'PlayService'. Did you mean 'removeLineFromStep'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:140:27:
+[37m      140 │ ...    this.playService.[32mremoveObjectFromStep[37m(this.selectedObjectId);
+          ╵                         [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+  'removeLineFromStep' is declared here.
+
+    src/app/services/play.service.ts:81:2:
+[37m      81 │   [32mremoveLineFromStep[37m(lineId: string): void {
+         ╵   [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'selectLine' does not exist on type 'PlayService'. Did you mean 'selectedLine$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:200:23:
+[37m      200 │       this.playService.[32mselectLine[37m(null);
+          ╵                        [32m~~~~~~~~~~[0m
+
+  'selectedLine$' is declared here.
+
+    src/app/services/play.service.ts:16:9:
+[37m      16 │   public [32mselectedLine$[37m = this.selectedLineSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'selectLine' does not exist on type 'PlayService'. Did you mean 'selectedLine$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:206:23:
+[37m      206 │       this.playService.[32mselectLine[37m(null);
+          ╵                        [32m~~~~~~~~~~[0m
+
+  'selectedLine$' is declared here.
+
+    src/app/services/play.service.ts:16:9:
+[37m      16 │   public [32mselectedLine$[37m = this.selectedLineSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'selectLine' does not exist on type 'PlayService'. Did you mean 'selectedLine$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:492:23:
+[37m      492 │       this.playService.[32mselectLine[37m(null);
+          ╵                        [32m~~~~~~~~~~[0m
+
+  'selectedLine$' is declared here.
+
+    src/app/services/play.service.ts:16:9:
+[37m      16 │   public [32mselectedLine$[37m = this.selectedLineSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'selectLine' does not exist on type 'PlayService'. Did you mean 'selectedLine$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:553:23:
+[37m      553 │       this.playService.[32mselectLine[37m(null);
+          ╵                        [32m~~~~~~~~~~[0m
+
+  'selectedLine$' is declared here.
+
+    src/app/services/play.service.ts:16:9:
+[37m      16 │   public [32mselectedLine$[37m = this.selectedLineSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2551: Property 'selectLine' does not exist on type 'PlayService'. Did you mean 'selectedLine$'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/components/playbook/playbook.component.ts:598:23:
+[37m      598 │       this.playService.[32mselectLine[37m(line);
+          ╵                        [32m~~~~~~~~~~[0m
+
+  'selectedLine$' is declared here.
+
+    src/app/services/play.service.ts:16:9:
+[37m      16 │   public [32mselectedLine$[37m = this.selectedLineSubject.asObservable();
+         ╵          [32m~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'generateId' does not exist on type 'PlayService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:24:15:
+[37m      24 │       id: this.[32mgenerateId[37m(),
+         ╵                [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'generateId' does not exist on type 'PlayService'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:35:15:
+[37m      35 │       id: this.[32mgenerateId[37m(),
+         ╵                [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2564: Property 'removePlayerFromSterId' has no initializer and is not definitely assigned in the constructor.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:89:2:
+[37m      89 │   [32mremovePlayerFromSterId[37m: string): void {
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1442: Expected '=' for property initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:89:32:
+[37m      89 │   removePlayerFromSterId: string[32m)[37m: void {
+         ╵                                 [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1068: Unexpected token. A constructor, method, accessor, or property was expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:89:33:
+[37m      89 │   removePlayerFromSterId: string)[32m:[37m void {
+         ╵                                  [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1068: Unexpected token. A constructor, method, accessor, or property was expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:89:35:
+[37m      89 │   removePlayerFromSterId: string): [32mvoid[37m {
+         ╵                                    [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:90:10:
+[37m      90 │     const [32mstep[37m = this.currentStepSubject.value;
+         ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'step'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:90:10:
+[37m      90 │     const [32mstep[37m = this.currentStepSubject.value;
+         ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:90:17:
+[37m      90 │     const step = [32mthis[37m.currentStepSubject.value;
+         ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:90:46:
+[37m      90 │     const step = this.currentStepSubject.value[32m;[37m
+         ╵                                               [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'step' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:91:8:
+[37m      91 │     if ([32mstep[37m) {
+         ╵         [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'p' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:92:41:
+[37m      92 │       step.players = step.players.filter([32mp[37m => p.id !== playerId);
+         ╵                                          [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'playerId'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:92:55:
+[37m      92 │       step.players = step.players.filter(p => p.id !== [32mplayerId[37m);
+         ╵                                                        [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentStepSubject' does not exist on type '{ const: any; if(step: any): void; }'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:93:11:
+[37m      93 │       this.[32mcurrentStepSubject[37m.next({ ...step });
+         ╵            [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'removeObjectFromStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:97:2:
+[37m      97 │   [32mremoveObjectFromStep[37m(objectId: string): void {
+         ╵   [32m~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'objectId'. Did you mean 'Object'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:97:23:
+[37m      97 │   removeObjectFromStep([32mobjectId[37m: string): void {
+         ╵                        [32m~~~~~~~~[0m
+
+  'Object' is declared here.
+
+    node_modules/typescript/lib/lib.es5.d.ts:270:12:
+[37m      270 │ declare var [32mObject[37m: ObjectConstructor;
+          ╵             [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:97:31:
+[37m      97 │   removeObjectFromStep(objectId[32m:[37m string): void {
+         ╵                                [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:97:33:
+[37m      97 │   removeObjectFromStep(objectId: [32mstring[37m): void {
+         ╵                                  [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:97:40:
+[37m      97 │   removeObjectFromStep(objectId: string)[32m:[37m void {
+         ╵                                         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:98:10:
+[37m      98 │     const [32mstep[37m = this.currentStepSubject.value;
+         ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'step'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:98:10:
+[37m      98 │     const [32mstep[37m = this.currentStepSubject.value;
+         ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:98:17:
+[37m      98 │     const step = [32mthis[37m.currentStepSubject.value;
+         ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:98:46:
+[37m      98 │     const step = this.currentStepSubject.value[32m;[37m
+         ╵                                               [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'step' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:99:8:
+[37m      99 │     if ([32mstep[37m) {
+         ╵         [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'o' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:100:41:
+[37m      100 │       step.objects = step.objects.filter([32mo[37m => o.id !== objectId);
+          ╵                                          [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'objectId'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:100:55:
+[37m      100 │       step.objects = step.objects.filter(o => o.id !== [32mobjectId[37m);
+          ╵                                                        [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2339: Property 'currentStepSubject' does not exist on type '{ const: any; if(step: any): void; }'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:101:11:
+[37m      101 │       this.[32mcurrentStepSubject[37m.next({ ...step });
+          ╵            [32m~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2552: Cannot find name 'selectLine'. Did you mean 'Selection'?[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:105:2:
+[37m      105 │   [32mselectLine[37m(line: PlayLine | null): void {
+          ╵   [32m~~~~~~~~~~[0m
+
+  'Selection' is declared here.
+
+    node_modules/typescript/lib/lib.dom.d.ts:21433:12:
+[37m      21433 │ declare var [32mSelection[37m: {
+            ╵             [32m~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'line'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:105:13:
+[37m      105 │   selectLine([32mline[37m: PlayLine | null): void {
+          ╵              [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:105:17:
+[37m      105 │   selectLine(line[32m:[37m PlayLine | null): void {
+          ╵                  [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'PlayLine' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:105:19:
+[37m      105 │   selectLine(line: [32mPlayLine[37m | null): void {
+          ╵                    [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18050: The value 'null' cannot be used here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:105:30:
+[37m      105 │   selectLine(line: PlayLine | [32mnull[37m): void {
+          ╵                               [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:105:35:
+[37m      105 │   selectLine(line: PlayLine | null)[32m:[37m void {
+          ╵                                    [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:106:8:
+[37m      106 │     this[32m.[37mselectedLineSubject.next(line);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'line'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:106:34:
+[37m      106 │     this.selectedLineSubject.next([32mline[37m);
+          ╵                                   [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:106:39:
+[37m      106 │     this.selectedLineSubject.next(line)[32m;[37m
+          ╵                                        [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'nextStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:109:2:
+[37m      109 │   [32mnextStep[37m(): void {
+          ╵   [32m~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:109:12:
+[37m      109 │   nextStep()[32m:[37m void {
+          ╵             [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:110:10:
+[37m      110 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:110:10:
+[37m      110 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:110:17:
+[37m      110 │     const play = [32mthis[37m.playSubject.value;
+          ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:110:39:
+[37m      110 │     const play = this.playSubject.value[32m;[37m
+          ╵                                        [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:111:8:
+[37m      111 │     if ([32m![37mplay) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:111:8:
+[37m      111 │     if ([32m[37m!play) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'play' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:111:9:
+[37m      111 │     if (![32mplay[37m) return;
+          ╵          [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: '{' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:111:15:
+[37m      111 │     if (!play) [32mreturn[37m;
+          ╵                [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:111:21:
+[37m      111 │     if (!play) return[32m;[37m
+          ╵                      [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:113:10:
+[37m      113 │     const [32mcurrentStep[37m = play.steps[play.currentStepIndex];
+          ╵           [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:113:10:
+[37m      113 │     const [32mcurrentStep[37m = play.steps[play.currentStepIndex];
+          ╵           [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:113:24:
+[37m      113 │     const currentStep = [32mplay[37m.steps[play.currentStepIndex];
+          ╵                         [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:113:35:
+[37m      113 │     const currentStep = play.steps[[32mplay[37m.currentStepIndex];
+          ╵                                    [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:113:57:
+[37m      113 │     const currentStep = play.steps[play.currentStepIndex][32m;[37m
+          ╵                                                          [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:114:8:
+[37m      114 │     if ([32m![37mcurrentStep) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:114:8:
+[37m      114 │     if ([32m[37m!currentStep) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'currentStep' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:114:9:
+[37m      114 │     if (![32mcurrentStep[37m) return;
+          ╵          [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: '{' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:114:22:
+[37m      114 │     if (!currentStep) [32mreturn[37m;
+          ╵                       [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:114:28:
+[37m      114 │     if (!currentStep) return[32m;[37m
+          ╵                             [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:117:10:
+[37m      117 │     const [32mnewStep[37m: PlayStep = {
+          ╵           [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'newStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:117:10:
+[37m      117 │     const [32mnewStep[37m: PlayStep = {
+          ╵           [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:117:17:
+[37m      117 │     const newStep[32m:[37m PlayStep = {
+          ╵                  [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:118:10:
+[37m      118 │       id: [32mthis[37m.generateId(),
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:119:41:
+[37m      119 │       players: JSON.parse(JSON.stringify([32mcurrentStep[37m.players)),
+          ╵                                          [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:120:41:
+[37m      120 │       objects: JSON.parse(JSON.stringify([32mcurrentStep[37m.objects)),
+          ╵                                          [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:122:5:
+[37m      122 │     }[32m;[37m
+          ╵      [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in scope for the shorthand property 'play'. Either declare one or provide an initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:125:4:
+[37m      125 │     [32mplay[37m.steps.splice(play.currentStepIndex + 1, 0, newStep);
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:125:8:
+[37m      125 │     play[32m.[37msteps.splice(play.currentStepIndex + 1, 0, newStep);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:125:22:
+[37m      125 │     play.steps.splice([32mplay[37m.currentStepIndex + 1, 0, newStep);
+          ╵                       [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'newStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:125:52:
+[37m      125 │     play.steps.splice(play.currentStepIndex + 1, 0, [32mnewStep[37m);
+          ╵                                                     [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:125:60:
+[37m      125 │     play.steps.splice(play.currentStepIndex + 1, 0, newStep)[32m;[37m
+          ╵                                                             [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in scope for the shorthand property 'play'. Either declare one or provide an initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:126:4:
+[37m      126 │     [32mplay[37m.currentStepIndex += 1;
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:126:8:
+[37m      126 │     play[32m.[37mcurrentStepIndex += 1;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:126:30:
+[37m      126 │     play.currentStepIndex += 1[32m;[37m
+          ╵                               [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:127:8:
+[37m      127 │     this[32m.[37mplaySubject.next({ ...play });
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:127:31:
+[37m      127 │     this.playSubject.next({ ...[32mplay[37m });
+          ╵                                [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:127:38:
+[37m      127 │     this.playSubject.next({ ...play })[32m;[37m
+          ╵                                       [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:128:8:
+[37m      128 │     this[32m.[37mcurrentStepSubject.next(newStep);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'newStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:128:33:
+[37m      128 │     this.currentStepSubject.next([32mnewStep[37m);
+          ╵                                  [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:128:41:
+[37m      128 │     this.currentStepSubject.next(newStep)[32m;[37m
+          ╵                                          [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'deleteCurrentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:131:2:
+[37m      131 │   [32mdeleteCurrentStep[37m(): void {
+          ╵   [32m~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:131:21:
+[37m      131 │   deleteCurrentStep()[32m:[37m void {
+          ╵                      [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:132:10:
+[37m      132 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:132:10:
+[37m      132 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:132:17:
+[37m      132 │     const play = [32mthis[37m.playSubject.value;
+          ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:132:39:
+[37m      132 │     const play = this.playSubject.value[32m;[37m
+          ╵                                        [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:133:8:
+[37m      133 │     if ([32m![37mplay || play.steps.length === 1) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:133:8:
+[37m      133 │     if ([32m[37m!play || play.steps.length === 1) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'play' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:133:9:
+[37m      133 │     if (![32mplay[37m || play.steps.length === 1) return;
+          ╵          [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:133:14:
+[37m      133 │     if (!play [32m||[37m play.steps.length === 1) return;
+          ╵               [32m~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:133:17:
+[37m      133 │     if (!play || [32mplay[37m.steps.length === 1) return;
+          ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:133:40:
+[37m      133 │     if (!play || play.steps.length === 1[32m)[37m return;
+          ╵                                         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:135:4:
+[37m      135 │     [32mplay[37m.steps.splice(play.currentStepIndex, 1);
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:135:22:
+[37m      135 │     play.steps.splice([32mplay[37m.currentStepIndex, 1);
+          ╵                       [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:136:8:
+[37m      136 │     if ([32mplay[37m.currentStepIndex >= play.steps.length) {
+          ╵         [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:136:33:
+[37m      136 │     if (play.currentStepIndex >= [32mplay[37m.steps.length) {
+          ╵                                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:137:6:
+[37m      137 │       [32mplay[37m.currentStepIndex = play.steps.length - 1;
+          ╵       [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:137:30:
+[37m      137 │       play.currentStepIndex = [32mplay[37m.steps.length - 1;
+          ╵                               [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:139:4:
+[37m      139 │     [32mthis[37m.playSubject.next({ ...play });
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:139:31:
+[37m      139 │     this.playSubject.next({ ...[32mplay[37m });
+          ╵                                [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:140:4:
+[37m      140 │     [32mthis[37m.currentStepSubject.next(play.steps[play.currentStepIndex]);
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:140:33:
+[37m      140 │     this.currentStepSubject.next([32mplay[37m.steps[play.currentStepIndex]);
+          ╵                                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:140:44:
+[37m      140 │     this.currentStepSubject.next(play.steps[[32mplay[37m.currentStepIndex]);
+          ╵                                             [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:141:2:
+[37m      141 │   [32m}[37m
+          ╵   [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'cloneCurrentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:143:2:
+[37m      143 │   [32mcloneCurrentStep[37m(): void {
+          ╵   [32m~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:143:20:
+[37m      143 │   cloneCurrentStep()[32m:[37m void {
+          ╵                     [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:144:10:
+[37m      144 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:144:10:
+[37m      144 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:144:17:
+[37m      144 │     const play = [32mthis[37m.playSubject.value;
+          ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:144:39:
+[37m      144 │     const play = this.playSubject.value[32m;[37m
+          ╵                                        [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:145:8:
+[37m      145 │     if ([32m![37mplay) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:145:8:
+[37m      145 │     if ([32m[37m!play) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'play' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:145:9:
+[37m      145 │     if (![32mplay[37m) return;
+          ╵          [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: '{' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:145:15:
+[37m      145 │     if (!play) [32mreturn[37m;
+          ╵                [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:145:21:
+[37m      145 │     if (!play) return[32m;[37m
+          ╵                      [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:147:10:
+[37m      147 │     const [32mcurrentStep[37m = play.steps[play.currentStepIndex];
+          ╵           [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:147:10:
+[37m      147 │     const [32mcurrentStep[37m = play.steps[play.currentStepIndex];
+          ╵           [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:147:24:
+[37m      147 │     const currentStep = [32mplay[37m.steps[play.currentStepIndex];
+          ╵                         [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:147:35:
+[37m      147 │     const currentStep = play.steps[[32mplay[37m.currentStepIndex];
+          ╵                                    [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:147:57:
+[37m      147 │     const currentStep = play.steps[play.currentStepIndex][32m;[37m
+          ╵                                                          [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:148:8:
+[37m      148 │     if ([32m![37mcurrentStep) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:148:8:
+[37m      148 │     if ([32m[37m!currentStep) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'currentStep' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:148:9:
+[37m      148 │     if (![32mcurrentStep[37m) return;
+          ╵          [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: '{' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:148:22:
+[37m      148 │     if (!currentStep) [32mreturn[37m;
+          ╵                       [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:148:28:
+[37m      148 │     if (!currentStep) return[32m;[37m
+          ╵                             [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:150:10:
+[37m      150 │     const [32mclonedStep[37m: PlayStep = {
+          ╵           [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'clonedStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:150:10:
+[37m      150 │     const [32mclonedStep[37m: PlayStep = {
+          ╵           [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:150:20:
+[37m      150 │     const clonedStep[32m:[37m PlayStep = {
+          ╵                     [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:151:10:
+[37m      151 │       id: [32mthis[37m.generateId(),
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:152:41:
+[37m      152 │       players: JSON.parse(JSON.stringify([32mcurrentStep[37m.players)),
+          ╵                                          [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:153:41:
+[37m      153 │       objects: JSON.parse(JSON.stringify([32mcurrentStep[37m.objects)),
+          ╵                                          [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'currentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:154:39:
+[37m      154 │       lines: JSON.parse(JSON.stringify([32mcurrentStep[37m.lines))
+          ╵                                        [32m~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:155:5:
+[37m      155 │     }[32m;[37m
+          ╵      [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in scope for the shorthand property 'play'. Either declare one or provide an initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:157:4:
+[37m      157 │     [32mplay[37m.steps.splice(play.currentStepIndex + 1, 0, clonedStep);
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:157:8:
+[37m      157 │     play[32m.[37msteps.splice(play.currentStepIndex + 1, 0, clonedStep);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:157:22:
+[37m      157 │     play.steps.splice([32mplay[37m.currentStepIndex + 1, 0, clonedStep);
+          ╵                       [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'clonedStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:157:52:
+[37m      157 │     play.steps.splice(play.currentStepIndex + 1, 0, [32mclonedStep[37m);
+          ╵                                                     [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:157:63:
+[37m      157 │     play.steps.splice(play.currentStepIndex + 1, 0, clonedStep)[32m;[37m
+          ╵                                                                [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in scope for the shorthand property 'play'. Either declare one or provide an initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:158:4:
+[37m      158 │     [32mplay[37m.currentStepIndex += 1;
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:158:8:
+[37m      158 │     play[32m.[37mcurrentStepIndex += 1;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:158:30:
+[37m      158 │     play.currentStepIndex += 1[32m;[37m
+          ╵                               [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:159:8:
+[37m      159 │     this[32m.[37mplaySubject.next({ ...play });
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:159:31:
+[37m      159 │     this.playSubject.next({ ...[32mplay[37m });
+          ╵                                [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:159:38:
+[37m      159 │     this.playSubject.next({ ...play })[32m;[37m
+          ╵                                       [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:160:8:
+[37m      160 │     this[32m.[37mcurrentStepSubject.next(clonedStep);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'clonedStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:160:33:
+[37m      160 │     this.currentStepSubject.next([32mclonedStep[37m);
+          ╵                                  [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:160:44:
+[37m      160 │     this.currentStepSubject.next(clonedStep)[32m;[37m
+          ╵                                             [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'createBlankStepAfterCurrent'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:163:2:
+[37m      163 │   [32mcreateBlankStepAfterCurrent[37m(): void {
+          ╵   [32m~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:163:31:
+[37m      163 │   createBlankStepAfterCurrent()[32m:[37m void {
+          ╵                                [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:164:10:
+[37m      164 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:164:10:
+[37m      164 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:164:17:
+[37m      164 │     const play = [32mthis[37m.playSubject.value;
+          ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:164:39:
+[37m      164 │     const play = this.playSubject.value[32m;[37m
+          ╵                                        [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:165:8:
+[37m      165 │     if ([32m![37mplay) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:165:8:
+[37m      165 │     if ([32m[37m!play) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'play' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:165:9:
+[37m      165 │     if (![32mplay[37m) return;
+          ╵          [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: '{' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:165:15:
+[37m      165 │     if (!play) [32mreturn[37m;
+          ╵                [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:165:21:
+[37m      165 │     if (!play) return[32m;[37m
+          ╵                      [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:167:10:
+[37m      167 │     const [32mblankStep[37m = this.createBlankStep();
+          ╵           [32m~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'blankStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:167:10:
+[37m      167 │     const [32mblankStep[37m = this.createBlankStep();
+          ╵           [32m~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:167:22:
+[37m      167 │     const blankStep = [32mthis[37m.createBlankStep();
+          ╵                       [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:167:44:
+[37m      167 │     const blankStep = this.createBlankStep()[32m;[37m
+          ╵                                             [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in scope for the shorthand property 'play'. Either declare one or provide an initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:168:4:
+[37m      168 │     [32mplay[37m.steps.splice(play.currentStepIndex + 1, 0, blankStep);
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:168:8:
+[37m      168 │     play[32m.[37msteps.splice(play.currentStepIndex + 1, 0, blankStep);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:168:22:
+[37m      168 │     play.steps.splice([32mplay[37m.currentStepIndex + 1, 0, blankStep);
+          ╵                       [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'blankStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:168:52:
+[37m      168 │     play.steps.splice(play.currentStepIndex + 1, 0, [32mblankStep[37m);
+          ╵                                                     [32m~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:168:62:
+[37m      168 │     play.steps.splice(play.currentStepIndex + 1, 0, blankStep)[32m;[37m
+          ╵                                                               [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS18004: No value exists in scope for the shorthand property 'play'. Either declare one or provide an initializer.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:169:4:
+[37m      169 │     [32mplay[37m.currentStepIndex += 1;
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:169:8:
+[37m      169 │     play[32m.[37mcurrentStepIndex += 1;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:169:30:
+[37m      169 │     play.currentStepIndex += 1[32m;[37m
+          ╵                               [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:170:8:
+[37m      170 │     this[32m.[37mplaySubject.next({ ...play });
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:170:31:
+[37m      170 │     this.playSubject.next({ ...[32mplay[37m });
+          ╵                                [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:170:38:
+[37m      170 │     this.playSubject.next({ ...play })[32m;[37m
+          ╵                                       [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:171:8:
+[37m      171 │     this[32m.[37mcurrentStepSubject.next(blankStep);
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'blankStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:171:33:
+[37m      171 │     this.currentStepSubject.next([32mblankStep[37m);
+          ╵                                  [32m~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:171:43:
+[37m      171 │     this.currentStepSubject.next(blankStep)[32m;[37m
+          ╵                                            [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'setCurrentStep'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:174:2:
+[37m      174 │   [32msetCurrentStep[37m(index: number): void {
+          ╵   [32m~~~~~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'index'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:174:17:
+[37m      174 │   setCurrentStep([32mindex[37m: number): void {
+          ╵                  [32m~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:174:22:
+[37m      174 │   setCurrentStep(index[32m:[37m number): void {
+          ╵                       [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'number' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:174:24:
+[37m      174 │   setCurrentStep(index: [32mnumber[37m): void {
+          ╵                         [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:174:31:
+[37m      174 │   setCurrentStep(index: number)[32m:[37m void {
+          ╵                                [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ':' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:175:10:
+[37m      175 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:175:10:
+[37m      175 │     const [32mplay[37m = this.playSubject.value;
+          ╵           [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:175:17:
+[37m      175 │     const play = [32mthis[37m.playSubject.value;
+          ╵                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:175:39:
+[37m      175 │     const play = this.playSubject.value[32m;[37m
+          ╵                                        [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1003: Identifier expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:8:
+[37m      176 │     if ([32m![37mplay || index < 0 || index >= play.steps.length) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter '(Missing)' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:8:
+[37m      176 │     if ([32m[37m!play || index < 0 || index >= play.steps.length) return;
+          ╵         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS7006: Parameter 'play' implicitly has an 'any' type.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:9:
+[37m      176 │     if (![32mplay[37m || index < 0 || index >= play.steps.length) return;
+          ╵          [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ',' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:14:
+[37m      176 │     if (!play [32m||[37m index < 0 || index >= play.steps.length) return;
+          ╵               [32m~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'index'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:17:
+[37m      176 │     if (!play || [32mindex[37m < 0 || index >= play.steps.length) return;
+          ╵                  [32m~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'index'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:30:
+[37m      176 │     if (!play || index < 0 || [32mindex[37m >= play.steps.length) return;
+          ╵                               [32m~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:39:
+[37m      176 │     if (!play || index < 0 || index >= [32mplay[37m.steps.length) return;
+          ╵                                        [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:176:56:
+[37m      176 │     if (!play || index < 0 || index >= play.steps.length[32m)[37m return;
+          ╵                                                         [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:178:4:
+[37m      178 │     [32mplay[37m.currentStepIndex = index;
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'index'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:178:28:
+[37m      178 │     play.currentStepIndex = [32mindex[37m;
+          ╵                             [32m~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:179:4:
+[37m      179 │     [32mthis[37m.playSubject.next({ ...play });
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:179:31:
+[37m      179 │     this.playSubject.next({ ...[32mplay[37m });
+          ╵                                [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2532: Object is possibly 'undefined'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:180:4:
+[37m      180 │     [32mthis[37m.currentStepSubject.next(play.steps[index]);
+          ╵     [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'play'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:180:33:
+[37m      180 │     this.currentStepSubject.next([32mplay[37m.steps[index]);
+          ╵                                  [32m~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'index'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:180:44:
+[37m      180 │     this.currentStepSubject.next(play.steps[[32mindex[37m]);
+          ╵                                             [32m~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:181:2:
+[37m      181 │   [32m}[37m
+          ╵   [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:183:2:
+[37m      183 │   [32mprivate[37m generateId(): string {
+          ╵   [32m~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2304: Cannot find name 'generateId'.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:183:10:
+[37m      183 │   private [32mgenerateId[37m(): string {
+          ╵           [32m~~~~~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1005: ';' expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:183:22:
+[37m      183 │   private generateId()[32m:[37m string {
+          ╵                       [32m^[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1434: Unexpected keyword or identifier.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:183:24:
+[37m      183 │   private generateId(): [32mstring[37m {
+          ╵                         [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS2693: 'string' only refers to a type, but is being used as a value here.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:183:24:
+[37m      183 │   private generateId(): [32mstring[37m {
+          ╵                         [32m~~~~~~[0m
+
+
+[31m✘ [41;31m[[41;97mERROR[41;31m][0m [1mTS1128: Declaration or statement expected.[0m [1m[35m[plugin angular-compiler][0m
+
+    src/app/services/play.service.ts:186:0:
+[37m      186 │ [32m}[37m
+          ╵ [32m^[0m
+
+

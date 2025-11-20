@@ -86,7 +86,7 @@ export class PlayService {
     }
   }
 
-  removePlayerFromSterId: string): void {
+  removePlayerFromStep(playerId: string): void {
     const step = this.currentStepSubject.value;
     if (step) {
       step.players = step.players.filter(p => p.id !== playerId);
