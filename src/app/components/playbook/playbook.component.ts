@@ -127,6 +127,22 @@ export class PlaybookComponent implements OnInit {
       this.linePreview = null;
     });
 
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Delete' || e.key === 'Backspace') {
+        if (this.selectedLine) {
+          this.playService.removeLineFromStep(this.selectedLine.id);
+          this.playService.selectLine(null);
+          this.selectedLine = null;
+        } else if (this.selectedPlayerId) {
+          this.playService.removePlayerFromStep(this.selectedPlayerId);
+          this.selectedPlayerId = null;
+        } else if (this.selectedObjectId) {
+          this.playService.removeObjectFromStep(this.selectedObjectId);
+          this.selectedObjectId = null;
+        }
+      }
+    });
+
     setTimeout(() => {
       this.svg = document.getElementById('playbook-canvas') as unknown as SVGSVGElement;
       if (this.svg) {
@@ -199,6 +215,13 @@ export class PlaybookComponent implements OnInit {
       if (playerId && this.currentStep) {
         const player = this.currentStep.players.find(p => p.id === playerId);
         if (player) {
+          // Check if this player already has an attached line
+          const hasAttachedLine = this.currentStep.lines.some(line => 
+            line.startAnchor.attachedTo === player.id || line.endAnchor.attachedTo === player.id
+          );
+          if (hasAttachedLine) {
+            return; // Don't allow drawing from players with attached lines
+          }
           this.lineStart = { x: player.x, y: player.y };
           this.linePreview = { x: player.x, y: player.y };
           this.lineStartAnchorPlayerId = playerId;
@@ -379,19 +402,27 @@ export class PlaybookComponent implements OnInit {
         handlesLayer.appendChild(endAnchor);
       } else if (this.draggingPlayer && this.currentStep) {
         // Show only start anchor when dragging a player close to it
-        handlesLayer.style.display = 'block';
-        this.currentStep.lines.forEach(line => {
-          if (!line.startAnchor.attachedTo && this.isNear({ x: this.draggingPlayer!.x, y: this.draggingPlayer!.y }, line.startAnchor)) {
-            const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            anchor.setAttribute('cx', String(line.startAnchor.x));
-            anchor.setAttribute('cy', String(line.startAnchor.y));
-            anchor.setAttribute('r', '8');
-            anchor.setAttribute('fill', '#2980b9');
-            anchor.setAttribute('stroke', '#fff');
-            anchor.setAttribute('stroke-width', '2');
-            handlesLayer.appendChild(anchor);
-          }
-        });
+        // But skip if the dragging player already has an attached line
+        const dragPlayerHasAttachedLine = this.currentStep.lines.some(line => 
+          line.startAnchor.attachedTo === this.draggingPlayer!.id || line.endAnchor.attachedTo === this.draggingPlayer!.id
+        );
+        if (!dragPlayerHasAttachedLine) {
+          handlesLayer.style.display = 'block';
+          this.currentStep.lines.forEach(line => {
+            if (!line.startAnchor.attachedTo && this.isNear({ x: this.draggingPlayer!.x, y: this.draggingPlayer!.y }, line.startAnchor)) {
+              const anchor = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+              anchor.setAttribute('cx', String(line.startAnchor.x));
+              anchor.setAttribute('cy', String(line.startAnchor.y));
+              anchor.setAttribute('r', '8');
+              anchor.setAttribute('fill', '#2980b9');
+              anchor.setAttribute('stroke', '#fff');
+              anchor.setAttribute('stroke-width', '2');
+              handlesLayer.appendChild(anchor);
+            }
+          });
+        } else {
+          handlesLayer.style.display = 'none';
+        }
       } else {
         handlesLayer.style.display = 'none';
       }
@@ -429,7 +460,7 @@ export class PlaybookComponent implements OnInit {
     } else {
       circle.setAttribute('points', '0,-15 15,10 -15,10');
     }
-    circle.setAttribute('fill', (player.type === 'offense' || player.type === 'offense-with-ball') ? 'rgba(255,255,255,0.1)' : 'rgba(255,0,0,0.1)');
+    circle.setAttribute('fill', (player.type === 'offense' || player.type === 'offense-with-ball') ? 'white' : 'white');
     if (player.type === 'offense-with-ball') {
       circle.setAttribute('stroke', 'black');
     } else if (player.type === 'offense') {
@@ -611,18 +642,27 @@ export class PlaybookComponent implements OnInit {
       this.draggingPlayer = null;
       // Check if player is close to any unattached line anchors
       if (this.currentStep) {
-        this.currentStep.lines.forEach(line => {
-          // Check start anchor attachment
-          if (!line.startAnchor.attachedTo && this.isNear({ x: player.x, y: player.y }, line.startAnchor)) {
-            line.startAnchor.attachedTo = player.id;
-            this.playService.updateLineInStep(line);
-          }
-          // Check end anchor attachment
-          if (!line.endAnchor.attachedTo && this.isNear({ x: player.x, y: player.y }, line.endAnchor)) {
-            line.endAnchor.attachedTo = player.id;
-            this.playService.updateLineInStep(line);
-          }
-        });
+        // Check if player already has an attachment
+        const playerAlreadyAttached = this.currentStep.lines.some(line => 
+          line.startAnchor.attachedTo === player.id || line.endAnchor.attachedTo === player.id
+        );
+        
+        if (!playerAlreadyAttached) {
+          this.currentStep.lines.forEach(line => {
+            // Check start anchor attachment
+            if (!line.startAnchor.attachedTo && this.isNear({ x: player.x, y: player.y }, line.startAnchor)) {
+              line.startAnchor.attachedTo = player.id;
+              this.playService.updateLineInStep(line);
+              return; // Only attach to first line found
+            }
+            // Check end anchor attachment
+            if (!line.endAnchor.attachedTo && this.isNear({ x: player.x, y: player.y }, line.endAnchor)) {
+              line.endAnchor.attachedTo = player.id;
+              this.playService.updateLineInStep(line);
+              return; // Only attach to first line found
+            }
+          });
+        }
       }
       this.renderStep();
     });

@@ -86,6 +86,22 @@ export class PlayService {
     }
   }
 
+  removePlayerFromSterId: string): void {
+    const step = this.currentStepSubject.value;
+    if (step) {
+      step.players = step.players.filter(p => p.id !== playerId);
+      this.currentStepSubject.next({ ...step });
+    }
+  }
+
+  removeObjectFromStep(objectId: string): void {
+    const step = this.currentStepSubject.value;
+    if (step) {
+      step.objects = step.objects.filter(o => o.id !== objectId);
+      this.currentStepSubject.next({ ...step });
+    }
+  }
+
   selectLine(line: PlayLine | null): void {
     this.selectedLineSubject.next(line);
   }
